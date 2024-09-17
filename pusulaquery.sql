@@ -1,0 +1,6 @@
+/*Case çalýþmasýna hoþ geldiniz. Veritabaný, Products ve Sales tablolarý oluþturuldu. 
+Ardýndan iki tablo için de kolonlar belirlenen veri tipleri ile yaratýldý. Veriler girildi.
+
+A store wants to track its product sales. The store has a database with product sales data. 
+They want to analyze the sales to find the total sales amount and number of sales for each product 
+per year. Additionally, they want to determine the product with the highest total sales amount.1) Satýþ tablosundaki tüm satýþlar 2024 yýlýna ait, her ürünün yýllýk satýþ tutarýný aþaðýdaki sorgu ile buluruz:*/SELECT Products.ProductName, SUM(Sales.Quantity * Products.Price) AS TotalSales FROM ProductsJOIN Sales ON Products.ProductID = Sales.ProductIDWHERE SaleDate BETWEEN '2024-01-01' AND '2024-12-31' /*Ýstediðimiz zaman aralýðýna göre düzenleyebiliriz.*/GROUP BY Products.ProductNameORDER BY TotalSales DESC/* 2) Satýþ sayýlarýný gösteren tablo:*/SELECT Products.ProductName, Sales.Quantity FROM SalesJOIN Products ON Sales.ProductID = Products.ProductIDORDER BY Quantity DESC/* 3) En yüksek toplam satýþ miktarýna sahip ürünü gösteren sorgu:*/SELECT TOP 1 Products.ProductName, SUM(Sales.Quantity * Products.Price) AS TotalSales FROM ProductsJOIN Sales ON Products.ProductID = Sales.ProductIDGROUP BY Products.ProductNameORDER BY TotalSales DESC
